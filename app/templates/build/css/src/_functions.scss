@@ -1,0 +1,9 @@
+//convert pixels to rem measurement
+@function rem($pixels) {
+	@return #{$pixels/16.0}rem;
+}
+
+//convert pixels to em measurement
+@function pem($pixels) {
+	@return #{$pixels/16.0}em;
+}
