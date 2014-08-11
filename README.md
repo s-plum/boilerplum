@@ -185,7 +185,7 @@ HTML default browser style overrides to reduce default cross-browser inconsisten
 
 ###_variables.scss
 
-Blank file to be used to store breakpoints, colors, and other values that will be commonly reused in your code
+Blank file to be used to store breakpoints, colors, and other values that will be commonly reused in your code, such as:
 
 ```shell
 $large_mobile: 500px;
