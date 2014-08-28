@@ -13,6 +13,7 @@ gulp.task('default', function (done) {
     {type: 'confirm', name: 'git', message: 'Add .gitignore and README?'}
   ],
   function (answers) {
+    answers['packageName'] = answers.name.replace(/ /g, "-").toLowerCase();
     gulp.src(__dirname + '/app/templates/**')
       .pipe(gulpif(!answers.git, gulpIgnore.exclude('.gitignore')))
       .pipe(gulpif(!answers.git, gulpIgnore.exclude('*.md')))

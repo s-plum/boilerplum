@@ -7,11 +7,16 @@ var gulp = require('gulp'),
     watch = require('gulp-watch'),
     browserify = require('browserify'),
     source = require('vinyl-source-stream'),
-    streamify = require('gulp-streamify');
+    streamify = require('gulp-streamify'),
+    plumber = require('gulp-plumber'),
+    onError = function (err) {  
+      console.log(err.toString());
+    };
  
 gulp.task('scripts', function() {
   return browserify('./build/js/main.js')
     .bundle()
+    .on('error', onError)
     .pipe(source('main.js'))
     .pipe(streamify(uglify()))
     .pipe(gulp.dest('./dist/js'))
@@ -32,6 +37,9 @@ gulp.task('html', function () {
 gulp.task('sassy', function() {
   gulp.src('./build/css/src/*.scss')
     .pipe(watch())
+    .pipe(plumber({
+      errorHandler: onError
+    }))
     .pipe(compass({
       config_file: './config.rb',
       css: './build/css',
