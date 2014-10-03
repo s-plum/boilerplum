@@ -9,6 +9,7 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     streamify = require('gulp-streamify'),
     plumber = require('gulp-plumber'),
+    autoprefixer = require('gulp-autoprefixer'),
     onError = function (err) {  
       console.log(err.toString());
     };
@@ -43,8 +44,23 @@ gulp.task('sassy', function() {
     .pipe(compass({
       config_file: './config.rb',
       css: './build/css',
-      sass: './build/css/src'
+      sass: './build/css/src',
+      sourcemap: true,
+      debug: true
     }))
+    .pipe(autoprefixer({
+          browsers: ['last 2 versions'],
+          cascade: false
+      }))
+    .pipe(gulp.dest('./dist/css'))
+    .pipe(connect.reload());
+});
+
+gulp.task('sassymap', function() {
+  gulp.src('./build/css/src/**/*.scss')
+    .pipe(gulp.dest('./dist/css/src'));
+  gulp.src('./build/css/*.map')
+    .pipe(watch())
     .pipe(gulp.dest('./dist/css'))
     .pipe(connect.reload());
 });

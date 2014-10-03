@@ -40,15 +40,22 @@ You may need to run the command as an administratior, depending on how permissio
 
 
 ##Boiling Plums
+> Slush uses Sass and Compass, with sourcemaps, to process stylesheets. Before setting up your project, make sure that your development environment is set up with Ruby, [Sass](http://sass-lang.com/install) (3.3 or higher), and [Compass](http://compass-style.org/install/) (1.0.0.alpha.19 or higher).
+
 Create a new directory and direct a new command/terminal window to that path. Run:
 
 ```
 slush boilerplum
 ```
 
-Assuming I haven't broken something, this should initialize boilerplum setup. Boilerplum will ask you a few quick questions, work a little magic, set up a new folder structure within the target folder, and install all the necessary dependencies to run your local environment. 
+Assuming I haven't broken something, this should initialize boilerplum setup. Boilerplum will ask you a few quick questions, work a little magic, and set up a new folder structure within the target folder, and install all the necessary dependencies to run your local environment. If you encounter npm permissions errors, run the following to re-attempt the install with root permissions:
 
-After dependencies are installed, you can initialize file watching, live reload, and compilation by running 
+```
+rm -rf node_modules
+sudo npm install
+```
+
+After dependencies are installed, you can initialize file watching, live reload, and compilation by running: 
 
 ```
 gulp
@@ -70,14 +77,12 @@ Boilerplum sets up a default file structure of:
 │    │    │    ├──  _mixins.scss
 │    │    │    ├──  _normalize.scss
 │    │    │    ├──  _variables.scss
-│    │    │    └──  global.scss
+│    │    │    └──  main.scss
 │    │    ├──  img
 │    │    │    └──  *
 │    │    ├──  index.html
 │    │    ├──  js
 │    │    │    └──  main.js
-├──  dist 
-│    └── * (output files will be created here)
 ├──  node_modules (once dependencies are installed)
 │    └── *
 ├──  .gitignore (only if you ask for git setup in the initial configuration questions)
@@ -92,7 +97,7 @@ When you run `gulp` in your newly plum-boiled folder, the application will:
 
 1. Start up a local instance of your index.html file at localhost:4242
 2. Set a watch on your html, css, js, and image files that will automatically reload the instance in the browser as files change (if LiveReload extension is installed in your browser).
-3. Initializes [Compass](//http://compass-style.org/) compilation of .scss files
+3. Initializes [Compass](//http://compass-style.org/) compilation of .scss files, including sourcemaps and autoprefixing with the help of [Autoprefixer](https://github.com/postcss/autoprefixer).
 
 The output for all processes will be logged in the terminal/command prompt window. Once all of the initialization processes have fired successfully, you can navigate to localhost:4242 in any browser on your local machine to should see a blank page with the title you provided in the template setup as the page title. Once everything is up and running, you can dive right in and start adding and editing files within the default folder structure. 
 
