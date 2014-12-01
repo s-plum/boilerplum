@@ -40,7 +40,7 @@ You may need to run the command as an administratior, depending on how permissio
 
 
 ##Boiling Plums
-> Slush uses Sass and Compass, with sourcemaps, to process stylesheets. Before setting up your project, make sure that your development environment is set up with Ruby, [Sass](http://sass-lang.com/install) (3.3 or higher), and [Compass](http://compass-style.org/install/) (1.0.0.alpha.19 or higher).
+> Slush uses Sass and Compass, with sourcemaps, to process stylesheets. Before setting up your project, make sure that your development environment is set up with Ruby, [Sass](http://sass-lang.com/install) (3.4 or higher), and [Compass](http://compass-style.org/install/) (1.0.1 or higher).
 
 Create a new directory and direct a new command/terminal window to that path. Run:
 
@@ -70,7 +70,7 @@ Boilerplum sets up a default file structure of:
 [your target folder]
 ├──  .sass-cache
 │    └── *
-├──  build
+├──  src
 │    ├──  css
 │    │	  ├──  src
 │    │    │	   ├──  _functions.scss
