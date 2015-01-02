@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "description": "<%= description %>",
   "repository": "",
-  "dependencies": {},
+  "dependencies": {
+    <% if (scriptLib === 'jquery') { %>"jquery": "^2.1.1"<% } %>
+  },
   "devDependencies": {
     "browserify": "^5.9.1",
     "del": "^0.1.3",
@@ -16,7 +18,6 @@
     "gulp-streamify": "0.0.5",
     "gulp-uglify": "~0.3.0",
     "gulp-watch": "^2.0.0",
-    "jquery": "^2.1.1",
     "vinyl-source-stream": "^0.1.1"
   }
 }

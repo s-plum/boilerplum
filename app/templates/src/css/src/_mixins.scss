@@ -34,10 +34,10 @@ mixins
 
 //keyframes animation builder -> adds -webkit prefix
 @mixin keyframes ($animation_name) {
-	@-webkit-keyframes $animation_name {
+	@-webkit-keyframes #{$animation_name} {
 		@content;
 	}
-	@keyframes $animation_name {
+	@keyframes #{$animation_name} {
 		@content;
 	}
 }
