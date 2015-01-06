@@ -12,16 +12,16 @@ gulp.task('default', function (done) {
     {type: 'confirm', name: 'git', message: 'Add .gitignore and README?'},
     {type: 'list', name: 'scriptLib', message: 'May I interest you in one of our delicious script libraries?', choices: [
     	{
+        name: 'No, thank you.',
+        value: 'none'
+      },
+      {
     		name: 'jQuery (all the bells and whistles)',
     		value: 'jquery'
     	},
     	{
     		name: 'plumQuery (one-bell basic CSS selector helper)',
     		value: 'plumquery'
-    	},
-    	{
-    		name: 'No, thank you.',
-    		value: 'none'
     	}
     	]}
   ],
