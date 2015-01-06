@@ -73,7 +73,7 @@ Boilerplum sets up a default file structure of:
 ├──  src
 │    ├──  css
 │    │	  ├──  src
-│    │    │	   ├──  _functions.scss
+│    │    │    ├──  _functions.scss
 │    │    │    ├──  _mixins.scss
 │    │    │    ├──  _normalize.scss
 │    │    │    ├──  _variables.scss
