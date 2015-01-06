@@ -99,7 +99,7 @@ When you run `gulp` in your newly plum-boiled folder, the application will:
 1. Start up a local instance of your index.html file at localhost:4242
 2. Set a watch on your html, css, js, and image files that will automatically reload the instance in the browser as files change (if LiveReload extension is installed in your browser).
 3. Initializes [Compass](//http://compass-style.org/) compilation of .scss files, including sourcemaps and autoprefixing with the help of [Autoprefixer](https://github.com/postcss/autoprefixer).
-4. [Browserifies](http://browserify.org/) your scripts.
+4. [Browserify](http://browserify.org/) your scripts.
 
 The output for all processes will be logged in the terminal/command prompt window. Once all of the initialization processes have fired successfully, you can navigate to localhost:4242 in any browser on your local machine to should see a blank page with the title you provided in the template setup as the page title. Once everything is up and running, you can dive right in and start adding and editing files within the default folder structure. 
 
