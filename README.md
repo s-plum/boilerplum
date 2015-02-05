@@ -1,10 +1,10 @@
-#boilerplum
+# boilerplum
 > A quick 'n' dirty UI sketchpad for proof-of-conceptin', script testin', or just-let-me-tryin'.
 
-##Boiled plums?
+## Boiled plums?
 Not really.
 
-##Installation
+## Installation
 Who needs a solid foundation when you can have a [Slush](http://slushjs.github.io/)-y one? Boilerplum is a slush generator that creates a small local development environment suited for UI developers low on time and high on ambition.
 
 If you already have Slush set up on your computer, jump on ahead to [The Next Step](#next-step). If you have no idea what I am talking about, then you are going to need to:
@@ -23,7 +23,7 @@ $ npm install -g slush
 
 4. If you want to avoid wearing out your Ctrl+F5 keys (or Command+R on Mac), you should set up your favorite browser with the [LiveReload extension](http://feedback.livereload.com/knowledgebase/articles/86242-how-do-i-install-and-use-the-browser-extensions-). If enabled, your local app will refresh the browser automatically when files change as the app is running.
 
-###<b id="next-step"></b>The Next Step
+### <b id="next-step"></b>The Next Step
 Boilerplum is still a work in progress, so it will not be published in the npm directory. To run the generator, you will need to clone the repository locally and link it up to npm. Find a nice, quiet, out-of-the-way directory on your machine, and run:
 
 ```
@@ -39,7 +39,7 @@ npm link
 You may need to run the command as an administratior, depending on how permissions are configured on your machine.
 
 
-##Boiling Plums
+## Boiling Plums
 > Slush uses Sass and Compass, with sourcemaps, to process stylesheets. Before setting up your project, make sure that your development environment is set up with Ruby, [Sass](http://sass-lang.com/install) (3.4 or higher), and [Compass](http://compass-style.org/install/) (1.0.1 or higher).
 
 Create a new directory and direct a new command/terminal window to that path. Run:
@@ -63,7 +63,7 @@ gulp
 
 from the target folder.
 
-##Out of the Box
+## Out of the Box
 Boilerplum sets up a default file structure of:
 
 ```shell
@@ -116,7 +116,7 @@ The ```global.scss``` file in your ```css/src``` folder imports a few partials t
 	```pem(16) => 1em```
 
 
-###_mixins.scss
+### _mixins.scss
 
 * **breakpoint($break)** - shorthand for media queries
 
@@ -174,7 +174,7 @@ The ```global.scss``` file in your ```css/src``` folder imports a few partials t
 		}
 	```
 
-###extends (in _mixins.scss)
+### extends (in _mixins.scss)
 
 See the [Sass documentation](http://sass-lang.com/documentation/file.SASS_REFERENCE.html) for more general instructions on using extends.
 
@@ -190,7 +190,7 @@ See the [Sass documentation](http://sass-lang.com/documentation/file.SASS_REFERE
 
 HTML default browser style overrides to reduce default cross-browser inconsistencies on HTML elements. Modified from [normalize.css](https://github.com/necolas/normalize.css).
 
-###_variables.scss
+### _variables.scss
 
 Blank file to be used to store breakpoints, colors, and other values that will be commonly reused in your code, such as:
 
@@ -201,6 +201,6 @@ $purple: #4b0062;
 $purple_dk: #2f003d;
 ```
 
-##Ready?
+## Ready?
 
 Go forth and make internet!
