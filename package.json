@@ -1,6 +1,6 @@
 {
   "name": "slush-boilerplum",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A quick 'n' dirty UI sketchpad for proof-of-conceptin', script testin', or just-let-me-tryin'.",
   "author": "Stephanie Plumeri",
   "dependencies": {
@@ -21,6 +21,7 @@
   "main": "slushfile.js",
   "devDependencies": {
     "chai": "^1.10.0",
+    "chai-fs": "^0.1.0",
     "gulp-tap": "^0.1.3",
     "mocha": "^2.1.0",
     "mock-gulp-dest": "^0.1.1"

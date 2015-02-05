@@ -48,7 +48,13 @@ gulp.task('watch:images', function() {
   });
 });
 
-gulp.task('watch', ['watch:scripts','watch:html','watch:images']);
+gulp.task('watch:sass', function() {
+  watch(srcPaths.sass, function(files, cb) {
+    gulp.start('sassy', cb);
+  });
+});
+
+gulp.task('watch', ['watch:scripts','watch:html','watch:images', 'watch:sass']);
 
 gulp.task('clean:html', function (cb) {
   del([distPath + '/**/*.html'], cb)
@@ -86,7 +92,6 @@ gulp.task('html', ['clean:html'], function () {
  
 gulp.task('sassy', function() {
   gulp.src(srcPaths.sass)
-    .pipe(watch(srcPaths.sass))
     .pipe(plumber({
       errorHandler: onError
     }))
