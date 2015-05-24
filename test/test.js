@@ -244,7 +244,7 @@ describe('slush-boilerplum', function() {
 var mockPrompt = function(answers) {
 	inquirer.prompt = function(prompts, done) {
 		prompts.forEach(function(prompt) {
-			if (!answers[prompt.name]) {
+			if (typeof answers[prompt.name] == 'undefined') {
 				answers[prompt.name] = prompt.default;
 			}
 		})

@@ -7,10 +7,10 @@ var gulp = require('gulp'),
 
 gulp.task('default', function (done) {  
   inquirer.prompt([
-    {type: 'input', name: 'name', message: 'Name for the app?'},
-    {type: 'input', name: 'description', message: 'Description for the app?'},
-    {type: 'confirm', name: 'git', message: 'Add .gitignore and README?'},
-    {type: 'list', name: 'scriptLib', message: 'May I interest you in one of our delicious script libraries?', choices: [
+    {type: 'input', name: 'name', message: 'Name for the app?', default: ''},
+    {type: 'input', name: 'description', message: 'Description for the app?', default: ''},
+    {type: 'confirm', name: 'git', message: 'Add .gitignore and README?', default: true},
+    {type: 'list', name: 'scriptLib', message: 'May I interest you in one of our delicious script libraries?', default: 'none', choices: [
     	{
         name: 'No, thank you.',
         value: 'none'
@@ -34,14 +34,10 @@ gulp.task('default', function (done) {
     if (!answers.git) {
     	srcFiles = srcFiles.concat(['!' + templateDir + 'README.md', '!' + templateDir + '.gitignore']);
     }
-    else {
-    	srcFiles.push(templateDir + '.gitignore');
-    }
-    gulp.src(srcFiles)
+    gulp.src(srcFiles, { dot: true })
       .pipe(template(answers))
       .pipe(conflict('./'))
       .pipe(gulp.dest('./'))
-      .pipe(install())
       .on('finish', function () {
         done();
       });
