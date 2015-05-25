@@ -1,7 +1,6 @@
 'use strict';
 var chai = require('chai'),
-	should = chai.should(),
-	assert = chai.assert,
+	expect = chai.expect,
 	inquirer = require('inquirer'),
 	gulp = require('gulp'),
 	mockGulpDest = require('mock-gulp-dest')(gulp),
@@ -26,8 +25,8 @@ describe('slush-boilerplum', function() {
 
 		it ('should use current directory for files', function(done) {
 			gulp.start('default').once('stop', function() {
-				mockGulpDest.cwd().should.equal(__dirname);
-        		mockGulpDest.basePath().should.equal(__dirname);
+				expect(mockGulpDest.cwd()).to.equal(__dirname);
+        		expect(mockGulpDest.basePath()).to.equal(__dirname);
         		done();
 			});
 		});
@@ -47,7 +46,7 @@ describe('slush-boilerplum', function() {
 			gulp.start('default').once('stop', function() {
 				mockGulpDest.assertDestContains({
 					src: {
-						css: [],
+						sass: [],
 						img: [],
 						js: []
 					}
@@ -69,15 +68,13 @@ describe('slush-boilerplum', function() {
 			gulp.start('default').once('stop', function() {
 				mockGulpDest.assertDestContains({
 					src: {
-						css: {
-							src: [
-								'_functions.scss',
-								'_mixins.scss',
-								'_normalize.scss',
-								'_variables.scss',
-								'main.scss'
-							]
-						}
+						sass: [
+							'_functions.scss',
+							'_mixins.scss',
+							'_normalize.scss',
+							'_variables.scss',
+							'main.scss'
+						]
 					}
 				});
 				done();
@@ -95,18 +92,27 @@ describe('slush-boilerplum', function() {
 			});
 		});
 
-		it ('should not include library references in main.js', function(done) {
+		it ('should not include jQuery reference in main.js', function(done) {
 			var answers = {
 				scriptLib: 'none'
 			};
-			var expected = '\'use strict\';';
 			gulp.src('../app/templates/src/js/main.js')
 				.pipe(template(answers))
 				.pipe(tap(function(file, t){
 					var actual = file.contents.toString('utf8').replace(/\r\n/g, '');
-					assert.equal(actual,expected);
+					expect(actual).to.not.contain('jquery');
 					done();
 				}));
+		});
+
+		it ('should not include Bower files', function(done) {
+			gulp.start('default').once('stop', function() {
+				mockGulpDest.assertDestNotContains([
+					'.bowerrc',
+					'bower.json'
+				]);
+				done();
+			});
 		});
 	});
 
@@ -153,88 +159,25 @@ describe('slush-boilerplum', function() {
 			var answers = {
 				scriptLib: 'jquery'
 			};
-			var expected = '\'use strict\';var $ = require(\'jquery\');';
 			gulp.src('../app/templates/src/js/main.js')
 				.pipe(template(answers))
 				.pipe(tap(function(file, t){
 					var actual = file.contents.toString('utf8').replace(/\r\n/g, '');
-					assert.equal(actual,expected);
+					expect(actual).to.contain('jquery');
 					done();
 				}));
 		});
 
-		it('should include jquery in package.json', function(done) {
-			var answers = {
-				scriptLib: 'jquery',
-				packageName: 'test',
-				description: 'test app'
-			};
-			gulp.src('../app/templates/package.json')
-				.pipe(template(answers))
-				.pipe(tap(function(file, t){
-					var actual = file.contents.toString('utf8');
-					assert(actual.indexOf('jquery') > 0);
-					done();
-				}));
-		});
-
-		it('should not include plumquery', function(done) {
+		it ('should include Bower files', function(done) {
 			mockPrompt({
 				name: 'test app',
 				scriptLib: 'jquery'
 			});
 			gulp.start('default').once('stop', function() {
-				mockGulpDest.assertDestNotContains({
-					src: {
-						js: 'plumquery.js'
-					}
-				});
-				done();
-			});
-		});
-	});
-
-	describe('generator with plumquery', function() {
-		it ('should include plumquery in main.js', function(done) {
-			var answers = {
-				scriptLib: 'plumquery'
-			};
-			var expected = '\'use strict\';var $ = require(\'./plumquery\');';
-			gulp.src('../app/templates/src/js/main.js')
-				.pipe(template(answers))
-				.pipe(tap(function(file, t){
-					var actual = file.contents.toString('utf8').replace(/\r\n/g, '');
-					assert.equal(actual,expected);
-					done();
-				}));
-		});
-
-		it('should not include jquery in package.json', function(done) {
-			var answers = {
-				scriptLib: 'plumquery',
-				packageName: 'test',
-				description: 'test app'
-			};
-			gulp.src('../app/templates/package.json')
-				.pipe(template(answers))
-				.pipe(tap(function(file, t){
-					var actual = file.contents.toString('utf8');
-					assert(actual.indexOf('jquery') === -1);
-					done();
-				}));
-		});
-
-		it('should include plumquery', function(done) {
-			mockPrompt({
-				name: 'test app',
-				scriptLib: 'plumquery'
-			});
-			gulp.start('default').once('stop', function() {
-				mockGulpDest.assertDestContains({
-					src: {
-						js: 'plumquery.js'
-					}
-				});
+				mockGulpDest.assertDestContains([
+					'.bowerrc',
+					'bower.json'
+				]);
 				done();
 			});
 		});

@@ -1,3 +1,1 @@
-'use strict';
-<% if (scriptLib === 'jquery') { %>var $ = require('jquery');<% } %>
-<% if (scriptLib === 'plumquery') { %>var $ = require('./plumquery');<% } %>
+<% if (scriptLib === 'jquery') { %>window.jQuery = window.$ = require('./plugins/jquery/dist/jquery.js');<% } %>

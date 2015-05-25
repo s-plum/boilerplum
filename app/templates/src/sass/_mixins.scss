@@ -1,0 +1,36 @@
+/* =================================================================
+mixins
+================================================================= */
+//linear gradient background with solid color fallback support for older browsers
+@mixin linear-gradient($fallback, $direction, $colorstops...) {
+	background: linear-gradient($direction, $colorstops...);
+	background-color: $fallback;
+}
+
+//keyframes animation builder -> adds -webkit prefix
+@mixin keyframes ($animation_name) {
+	@-webkit-keyframes #{$animation_name} {
+		@content;
+	}
+	@keyframes #{$animation_name} {
+		@content;
+	}
+}
+
+/* =================================================================
+extends
+================================================================= */
+//make element invisible on screen but still visible to screen readers
+//@extend %wai
+%wai {
+	height:0;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	text-indent: -9999em;
+	-webkit-appearance: none;
+	width: 0;
+	z-index: -1;
+}
+

@@ -7,40 +7,17 @@ Not really.
 ## Installation
 Who needs a solid foundation when you can have a [Slush](http://slushjs.github.io/)-y one? Boilerplum is a slush generator that creates a small local development environment suited for UI developers low on time and high on ambition.
 
-If you already have Slush set up on your computer, jump on ahead to [The Next Step](#next-step). If you have no idea what I am talking about, then you are going to need to:
+To get started, you will need to have the following dependencies installed globally on your machine:
 
-1. Install [Node.js](http://nodejs.org/). The download should also include [npm](https://www.npmjs.org/), the node package manager.
+* [Node.js](http://nodejs.org/)
+* [Bower](http://bower.io/)
+* [Compass](http://compass-style.org/install/)
+* [Slush](http://slushjs.github.io/) 
 
-2. If for some reason npm does not install (test by running `npm` in the command line after you have installed node), install it manually by running the command:
-```
-$ curl http://npmjs.org/install.sh | sh
-```
-
-3. Install slush:
-```
-$ npm install -g slush
-```
-
-4. If you want to avoid wearing out your Ctrl+F5 keys (or Command+R on Mac), you should set up your favorite browser with the [LiveReload extension](http://feedback.livereload.com/knowledgebase/articles/86242-how-do-i-install-and-use-the-browser-extensions-). If enabled, your local app will refresh the browser automatically when files change as the app is running.
-
-### <b id="next-step"></b>The Next Step
-Boilerplum is still a work in progress, so it will not be published in the npm directory. To run the generator, you will need to clone the repository locally and link it up to npm. Find a nice, quiet, out-of-the-way directory on your machine, and run:
-
-```
-git clone https://github.com/s-plum/boilerplum.git
-```
-
-After the depository is cloned, jump into the ```boilerplum``` directory and run:
-
-```
-npm link
-```
-
-You may need to run the command as an administratior, depending on how permissions are configured on your machine.
+If you want to avoid wearing out your Ctrl+F5 keys (or Command+R on Mac), you should set up your favorite browser with the [LiveReload extension](http://feedback.livereload.com/knowledgebase/articles/86242-how-do-i-install-and-use-the-browser-extensions-). If enabled, your local app will refresh the browser automatically when files change as the app is running.
 
 
 ## Boiling Plums
-> Slush uses Sass and Compass, with sourcemaps, to process stylesheets. Before setting up your project, make sure that your development environment is set up with Ruby, [Sass](http://sass-lang.com/install) (3.4 or higher), and [Compass](http://compass-style.org/install/) (1.0.1 or higher).
 
 Create a new directory and direct a new command/terminal window to that path. Run:
 
@@ -48,20 +25,24 @@ Create a new directory and direct a new command/terminal window to that path. Ru
 slush boilerplum
 ```
 
-Assuming I haven't broken something, this should initialize boilerplum setup. Boilerplum will ask you a few quick questions, work a little magic, and set up a new folder structure within the target folder, and install all the necessary dependencies to run your local environment. If you encounter npm permissions errors, run the following to re-attempt the install with root permissions:
+Assuming I haven't broken something, this should initialize boilerplum setup. Boilerplum will ask you a few quick questions, work a little magic, and set up a new folder structure within the target folder. Once the folder is set up, install the rest of the project dependencies:
 
 ```
-rm -rf node_modules
-sudo npm install
+npm install
+```
+
+If you are using jQuery in your project, you will need to install that with Bower:
+```
+bower install
 ```
 
 After dependencies are installed, you can initialize file watching, live reload, and compilation by running: 
 
 ```
-gulp
+gulp serve --watch
 ```
 
-from the target folder.
+from the target folder. Additional build command tasks are set up in the `gulpfile` of your newly slushed project.
 
 ## Out of the Box
 Boilerplum sets up a default file structure of:
@@ -69,39 +50,40 @@ Boilerplum sets up a default file structure of:
 ```shell
 [your target folder]
 ├──  .sass-cache
-│    └── *
 ├──  src
-│    ├──  css
-│    │	  ├──  src
-│    │    │    ├──  _functions.scss
-│    │    │    ├──  _mixins.scss
-│    │    │    ├──  _normalize.scss
-│    │    │    ├──  _variables.scss
-│    │    │    └──  main.scss
-│    │    ├──  img
-│    │    │    └──  *
-│    │    ├──  index.html
-│    │    ├──  js
-│    │    │    ├──  main.js
-│    │    │    └──  plumquery.js (only if you ask for the plumquery js helper in the initial configuration)
+│    ├──  sass
+│    │    ├──  _functions.scss
+│    │    ├──  _mixins.scss
+│    │    ├──  _normalize.scss
+│    │    ├──  _variables.scss
+│    │    └──  main.scss
+│    ├──  img
+│    │    └──  *
+│    ├──  index.html
+│    ├──  js
+│    │    ├──  main.js
+│    │    └──  plugins
+│    │    │    └── (Javascript dependencies installed via Bower)
 ├──  node_modules (once dependencies are installed)
 │    └── *
-├──  .gitignore (only if you ask for git setup in the initial configuration)
+├──  .bowerrc (if configured to use jQuery)
+├──  .gitignore (if configured to include default git files)
+├──  bower.json (if configured to use jQuery)
 ├──  config.rb
 ├──  gulpfile.js
 ├──  package.json
-└──  README.md (only if you ask for git setup in the initial configuration)
+└──  README.md (if configured to include default git files)
 ```
 
 ## Working With Boilerplum
-When you run `gulp` in your newly plum-boiled folder, the application will:
+When you run `gulp serve --watch` in your newly plum-boiled folder, the application will:
 
-1. Start up a local instance of your index.html file at localhost:4242
-2. Set a watch on your html, css, js, and image files that will automatically reload the instance in the browser as files change (if LiveReload extension is installed in your browser).
-3. Initialize [Compass](//http://compass-style.org/) compilation of .scss files, including sourcemaps and autoprefixing with the help of [Autoprefixer](https://github.com/postcss/autoprefixer).
-4. [Browserify](http://browserify.org/) your scripts.
+1. Start up a local server to serve up your index.html file
+2. Set a watch on your HTML, Sass, Javascript, and image files that will automatically reload the instance in the browser as files change (if LiveReload extension is installed in your browser)
+3. Initialize [Compass](//http://compass-style.org/) compilation of .scss files, including sourcemaps and autoprefixing with the help of [Autoprefixer](https://github.com/postcss/autoprefixer)
+4. [Browserify](http://browserify.org/) your scripts
 
-The output for all processes will be logged in the terminal/command prompt window. Once all of the initialization processes have fired successfully, you can navigate to localhost:4242 in any browser on your local machine to should see a blank page with the title you provided in the template setup as the page title. Once everything is up and running, you can dive right in and start adding and editing files within the default folder structure. 
+The output for all processes will be logged in the terminal/command prompt window, and the compiled files will be dumped into a `dist` folder in the root project directory. Once all initial script processing has completed, you can view your site at http://localhost:3000. If you have LiveReload enabled, you can begin making edits to your `src` directory and see changes appear in your browser as you edit.
 
 ## Batteries Not Included (but Sass functions are)
 The ```global.scss``` file in your ```css/src``` folder imports a few partials to help kick off your Sass-y style sheets:
@@ -118,23 +100,10 @@ The ```global.scss``` file in your ```css/src``` folder imports a few partials t
 
 ### _mixins.scss
 
-* **breakpoint($break)** - shorthand for media queries
-
-	```@include breakpoint(600px) => @media screen and (min-width: 600px)```
-* **filter($params)** - returns standard and browser-prefixed styles for the filter attribute
-	
-	```@include filter(grayscale(50%)) => -webkit-filter: grayscale(50%); filter: grayscale(50%);```
-
 * **linear-gradient($fallback, $direction, $colorstops...)** - linear gradient background with solid color fallback support for older browsers
 
 	```@include linear-gradient(#fff, to bottom, #fff 0%, #000 100%)```
 
-* **display-flex** - returns prefixed properties for the flexbox display: flex property
-
-	```@include display-flex => display: -ms-flex; display: -webkit-flex; display: flex;```
-* **flex-property($property, $value)** - returns prefixed properties for flexbox style attributes
-	
-	```@include flex-property(justify-content, flex-start) => -ms-justify-content: flex-start; -webkit-justify-content: flex-start; justify-content: flex-start;
 * **keyframes($animation_name)** - helper to build out animation with regular and -webkit-prefixed declarations
 
 	```shell
@@ -152,35 +121,10 @@ The ```global.scss``` file in your ```css/src``` folder imports a few partials t
 		to { color: #000; }
 	}
 	```
-* **animation($params)** - returns standard and -webkit-prefixed animation declaration
-	
-	```@include animation(my-animation 1s linear infinite) => -webkit-animation: my-animation 1s linear infinite; animation: my-animation 1s linear infinite;```
-
-* **squishy-sprite($sprite, $index)** - to make sprite images responsive, so they can be sized relative to their container without worrying about improper background positioning moving the sprite as the window resizes. Best used when combined with [Compass sprites](http://compass-style.org/help/tutorials/spriting/) and [Sass for loops](http://thesassway.com/intermediate/if-for-each-while).
-
-	```shell
-	@for $i from 1 through length(sprite-names($share)) {
-			$name: nth(sprite-names($share), $i);
-			&.#{$name} {
-				&:before {
-					@include share-sprite($name);
-					@include squishy-sprite($share, $i);
-				}
-				&:hover:before, &:focus:before {
-					@include share-blue-sprite($name);
-					@include squishy-sprite($share, $i);
-				}
-			}
-		}
-	```
 
 ### extends (in _mixins.scss)
 
 See the [Sass documentation](http://sass-lang.com/documentation/file.SASS_REFERENCE.html) for more general instructions on using extends.
-
-* **%borderbox** - adds prefixing for box-sizing
-	
-	```@extend %borderbox => -moz-box-sizing: border-box; box-sizing: border-box;```
 
 * **%wai** - styles that hide content visually while still making it accessible to screen readers
 	
