@@ -1,6 +1,6 @@
 {
   "name": "slush-boilerplum",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A quick 'n' dirty UI sketchpad for proof-of-conceptin', script testin', or just-let-me-tryin'.",
   "author": "Stephanie Plumeri",
   "dependencies": {

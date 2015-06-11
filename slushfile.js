@@ -1,6 +1,5 @@
 var fs = require('fs'),
     gulp = require('gulp'),  
-    install = require('gulp-install'),
     conflict = require('gulp-conflict'),
     template = require('gulp-template'),
     inquirer = require('inquirer'),
